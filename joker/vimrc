@@ -1,0 +1,52 @@
+au BufNewFile *.cpp r ~/template.cpp
+nmap <F5> :w \| !clear && g++ -std=c++17 -Wshadow -Wall % -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g<CR>
+nmap <F9> :w \| !clear && g++ -std=c++17 -Wshadow -Wall % -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g && ./a.out<CR>
+nmap <F6> :w \| !clear && g++ -std=c++17 -Wshadow -Wall % -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g && ./a.out < in <CR>
+nmap <F8> :w \| !clear && ./test.sh<CR>
+nmap <F2> :w \| !clear && g++ -std=c++17 -Wshadow -Wall % -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g && ./a.out < in > out <CR>
+map <C-c> "+y
+
+filetype detect
+set nocompatible
+set exrc
+set mouse=a
+
+filetype plugin indent on
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
+
+set smarttab
+set autoindent
+set smartindent
+set cindent
+
+set showcmd
+set number
+set autowrite
+set autoread
+
+set nowrap
+
+set shell=bash
+
+let g:ycm_use_clangd = "Never"
+autocmd FileType apache setlocal commentstring=#\ %s
+
+call plug#begin('~/.vim/plugged')
+
+" For MS Windows, this is probably better:
+"call plug#begin('~/vimfiles/plugged')
+
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'gabrielsimoes/cfparser.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'francoiscabrol/ranger.vim'
+" ... etc
+
+call plug#end()
+
