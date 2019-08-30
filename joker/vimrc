@@ -4,11 +4,18 @@ nmap <F9> :w \| !clear && g++ -std=c++17 -Wshadow -Wall % -fsanitize=address -fs
 nmap <F6> :w \| !clear && g++ -std=c++17 -Wshadow -Wall % -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g && ./a.out < in <CR>
 nmap <F8> :w \| !clear && ./test.sh<CR>
 nmap <F2> :w \| !clear && g++ -std=c++17 -Wshadow -Wall % -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g && ./a.out < in > out <CR>
-map <C-c> "+y
+
+vnoremap <C-c> "+y
+nmap <c-p> "+p
+nmap <c-a> ggvG
+
+
+nmap <c-s> :w<CR>
+imap <c-s> <Esc>:w<CR>a
+
 
 filetype detect
 set nocompatible
-set exrc
 set mouse=a
 
 filetype plugin indent on
@@ -31,10 +38,21 @@ set autoread
 
 set nowrap
 
-set shell=bash
+set shell=/usr/bin/zsh
+
+" My Changes
+set relativenumber
+colorscheme OceanicNext
+
 
 let g:ycm_use_clangd = "Never"
 autocmd FileType apache setlocal commentstring=#\ %s
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 
 call plug#begin('~/.vim/plugged')
 
@@ -46,6 +64,11 @@ Plug 'honza/vim-snippets'
 Plug 'gabrielsimoes/cfparser.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'francoiscabrol/ranger.vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'scrooloose/nerdtree'
+Plug 'MarcWeber/vim-addon-manager'
 " ... etc
 
 call plug#end()
