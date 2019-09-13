@@ -9,7 +9,7 @@ template<typename T>
 struct BIT {
     vector<T> tree;
     
-    void upd(int i, auto v) {
+    void upd (int i, auto v) {
         ++i;
         while (i < (int) tree.size()) {
             tree[i] += v;
@@ -17,21 +17,39 @@ struct BIT {
         }
     }
 
-    BIT(const vector<auto> &a) {
+    BIT (int n) {
+        tree.resize(n + 1, 0);
+    }
+
+    BIT (const vector<auto> &a) {
         tree.resize(a.size() + 1, 0);
         for (int i = 0; i < (int) a.size(); i++) {
             upd(i, a[i]);
         }
     }
 
-    BIT(auto *a, int n) {
+    BIT (auto *a, int n) {
         tree.resize(n + 1, 0);
         for (int i = 0; i < n; i++) {
             upd(i, a[i]);
         }
     }
 
-    T prefSum(int i) {
+    void push (const vector<auto> &a) {
+        tree.resize(a.size() + 1, 0);
+        for (int i = 0; i < (int) a.size(); i++) {
+            upd(i, a[i]);
+        }
+    }
+
+    void push (auto *a, int n) {
+        tree.resize(n + 1, 0);
+        for (int i = 0; i < n; i++) {
+            upd(i, a[i]);
+        }
+    }
+
+    T prefSum (int i) {
         ++i;
         T ret = 0;
         while (i > 0) {
@@ -41,15 +59,15 @@ struct BIT {
         return ret;
     }
 
-    T rangeSum(int l, int r) {
+    T rangeSum (int l, int r) {
         return prefSum(r) - prefSum(l - 1);
     }
 
-    T pos(int i) {
+    T pos (int i) {
         return rangeSum(i, i);
     }
 
-    void change(int i, int v) {
+    void change (int i, int v) {
         upd(i, v - pos(i));
     }
 };
