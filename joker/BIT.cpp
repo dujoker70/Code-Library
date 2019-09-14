@@ -28,7 +28,7 @@ struct BIT {
         }
     }
 
-    BIT (auto *a, int n) {
+    BIT (const auto *a, int n) {
         tree.resize(n + 1, 0);
         for (int i = 0; i < n; i++) {
             upd(i, a[i]);
@@ -42,7 +42,7 @@ struct BIT {
         }
     }
 
-    void push (auto *a, int n) {
+    void push (const auto *a, int n) {
         tree.resize(n + 1, 0);
         for (int i = 0; i < n; i++) {
             upd(i, a[i]);
