@@ -81,9 +81,11 @@ struct SegmentTree {
         int mid = (l + r) / 2;
         if (i <= mid) {
             __update(ind << 1, l, mid, i, v);
-            return;
         }
-        __update(ind << 1 | 1, mid + 1, r, i, v);
+        else {
+            __update(ind << 1 | 1, mid + 1, r, i, v);
+        }
+        tree[ind] = merge(tree[ind << 1], tree[ind << 1 | 1]);
     }
 
     void __update (int ind, int l, int r, int a, int b, auto v) {
