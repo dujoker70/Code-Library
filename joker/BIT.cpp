@@ -5,49 +5,21 @@ const int MAX = 1e5 + 5;
 
 #define dbg(a) cout << "-> " << #a << " = " << a << endl
 
-template<typename T>
+template <typename T, int N>
 struct BIT {
-    vector<T> tree;
+    int tree[N];
     
-    void upd (int i, auto v) {
+	BIT () {
+		memset(tree, 0, sizeof tree);
+	}
+
+    void upd (int i, T v) {
         ++i;
-        while (i < (int) tree.size()) {
+        while (i < N) {
             tree[i] += v;
             i += i & -i;
         }
-    }
-
-    BIT (int n) {
-        tree.resize(n + 1, 0);
-    }
-
-    BIT (const vector<auto> &a) {
-        tree.resize(a.size() + 1, 0);
-        for (int i = 0; i < (int) a.size(); i++) {
-            upd(i, a[i]);
-        }
-    }
-
-    BIT (const auto *a, int n) {
-        tree.resize(n + 1, 0);
-        for (int i = 0; i < n; i++) {
-            upd(i, a[i]);
-        }
-    }
-
-    void push (const vector<auto> &a) {
-        tree.resize(a.size() + 1, 0);
-        for (int i = 0; i < (int) a.size(); i++) {
-            upd(i, a[i]);
-        }
-    }
-
-    void push (const auto *a, int n) {
-        tree.resize(n + 1, 0);
-        for (int i = 0; i < n; i++) {
-            upd(i, a[i]);
-        }
-    }
+	}
 
     T prefSum (int i) {
         ++i;
@@ -74,8 +46,14 @@ struct BIT {
 
 int main() {
     vector<int> v = {2, 1, 4, 5, 6};
-    BIT<int> bit(v);
+    BIT<int, 10> bit;
+	for (int i = 0; i < (int) v.size(); i++) {
+		bit.upd(i, v[i]);
+	}
     cout << bit.rangeSum(1, 4) << endl;
+	for (int i = 0; i < (int) v.size(); i++) {
+		cout << bit.pos(i) << endl;
+	}
     return 0;
 }
 

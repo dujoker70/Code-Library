@@ -5,3 +5,8 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 #pragma GCC optimization ("unroll-loops")
 
 
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
+using namespace std;
+using namespace __gnu_pbds;
