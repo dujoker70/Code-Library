@@ -52,8 +52,8 @@ void ntt (int *a, int n, int dir) {
             for (int j = 0; j < (m >> 1); ++j) {
                 int &u = a[i + j], &v = a[i + j + (m >> 1)];
                 int t = mul(v, w[dir ? n - n / m * j : n / m * j]);
-                v = u - t < 0 ? u - t + M : u - t;
-                u = u + t >= M ? u + t - M : u + t;
+                v = sub(u, t);
+                u = add(u, t);
             }
         }
     }
